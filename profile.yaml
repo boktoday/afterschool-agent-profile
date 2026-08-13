@@ -1,0 +1,7 @@
+description: 'Afterschool Agent — a daily-practice companion for teenagers learning
+  the Eight Essentials (Christian or Universal tradition). Built on the Hermes Lean
+  architecture: gentle mentor persona, profile-scoped local memory, and an optional
+  Token Router disabled by default. Generates a Morning Minute audio plan at 6 am
+  via Piper TTS, an afternoon Afterschool Check-In, and teaches from a guide of
+  MD files the student drops into essentials/.'
+description_auto: false

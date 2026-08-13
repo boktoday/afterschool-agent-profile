@@ -1,0 +1,124 @@
+name: afterschool
+description: Afterschool Agent — calm ink-and-sand. Slate, paper, and a single warm accent for headings and active borders.
+
+# Palette
+#   paper white    #F4F1EA   (primary text, light rows)
+#   soft sand      #E5DCC8   (gradient step)
+#   muted teal     #6E8A8A   (gradient step)
+#   slate          #2E3A45   (deep shadow rows — decorative only)
+#   ink            #1A222B   (background — calm, not blue, not black)
+#   amber accent   #D49B4A   (accent — headings, active borders, banners)
+#   rust           #B8632E   (warnings, active prompts)
+#   moss           #6B8E5A   (success, completed states)
+
+colors:
+  background: "#1A222B"
+
+  banner_border: "#3A4856"
+  banner_title: "#F4F1EA"
+  banner_accent: "#D49B4A"
+  banner_dim: "#8A99A8"
+  banner_text: "#F4F1EA"
+
+  ui_accent: "#D49B4A"
+  ui_label: "#B8632E"
+  ui_text: "#F4F1EA"
+  ui_primary: "#F4F1EA"
+  ui_border: "#3A4856"
+  ui_tool: "#6E8A8A"
+  ui_thinking: "#6E8A8A"
+  ui_ok: "#6B8E5A"
+  ui_warn: "#D49B4A"
+  ui_error: "#B8632E"
+
+  prompt: "#F4F1EA"
+  input_rule: "#3A4856"
+  response_border: "#D49B4A"
+  session_label: "#D49B4A"
+  session_border: "#3A4856"
+  section_label: "#B8632E"
+
+  status_bar_bg: "#101820"
+  status_bar_text: "#F4F1EA"
+  status_bar_strong: "#D49B4A"
+  status_bar_dim: "#8A99A8"
+  status_bar_good: "#6B8E5A"
+  status_bar_warn: "#D49B4A"
+  status_bar_bad: "#B8632E"
+  status_bar_critical: "#B8632E"
+  voice_status_bg: "#101820"
+
+  selection_bg: "#2E3A45"
+  completion_menu_bg: "#1A222B"
+  completion_menu_current_bg: "#2E3A45"
+  completion_menu_meta_bg: "#101820"
+  completion_menu_meta_current_bg: "#3A4856"
+
+  diff_added: "#1F2A20"
+  diff_removed: "#2A1F1A"
+  diff_added_word: "#6B8E5A"
+  diff_removed_word: "#B8632E"
+  syntax_string: "#6B8E5A"
+  syntax_number: "#F4F1EA"
+  syntax_keyword: "#D49B4A"
+  syntax_comment: "#8A99A8"
+
+spinner:
+  waiting_faces:
+    - "(•)"
+    - "(·)"
+    - "(•)"
+    - "(·)"
+  thinking_faces:
+    - "(•)"
+    - "(·)"
+    - "(•)"
+    - "(·)"
+  thinking_verbs:
+    - "on it"
+    - "reading the brief"
+    - "drafting"
+    - "checking the details"
+    - "closing the loop"
+    - "shipping"
+  wings:
+    - ["• ", " •"]
+    - ["· ", " ·"]
+    - ["• ", " •"]
+    - ["· ", " ·"]
+
+branding:
+  agent_name: "Afterschool Agent"
+  welcome: "Afterschool Agent — what are we building?"
+  goodbye: "Done. •"
+  response_label: " • Afterschool "
+  prompt_symbol: "•"
+  help_header: "• Afterschool — say the word"
+
+tool_prefix: "•"
+
+tool_emojis:
+  terminal: "•"
+  web_search: "◇"
+  web_extract: "◇"
+  session_search: "◈"
+
+banner_logo: |-
+  [bold #F4F1EA] █████╗ ███████╗████████╗███████╗ [/]
+  [bold #E5DCC8]██╔══██╗██╔════╝╚══██╔══╝██╔════╝[/]
+  [#D49B4A]███████║█████╗     ██║   █████╗  [/]
+  [#6E8A8A]██╔══██║██╔══╝     ██║   ██╔══╝  [/]
+  [bold #F4F1EA]██║  ██║██║        ██║   ███████╗[/]
+  [#8A99A8]╚═╝  ╚═╝╚═╝        ╚═╝   ╚══════╝[/]
+  [#6E8A8A]    ███████╗ ██████╗██╗  ██╗ ██████╗  ██████╗ ██╗     [/]
+  [bold #D49B4A]    ██╔════╝██╔════╝██║  ██║██╔═══██╗██╔═══██╗██║     [/]
+  [#6E8A8A]    █████╗  ██║     ███████║██║   ██║██║   ██║██║     [/]
+  [#E5DCC8]    ██╔══╝  ██║     ██╔══██║██║   ██║██║   ██║██║     [/]
+  [#F4F1EA]    ███████╗╚██████╗██║  ██║╚██████╔╝╚██████╔╝███████╗[/]
+  [#8A99A8]    ╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝[/]
+
+banner_hero: |-
+  [#F4F1EA]⠀⠀⠀⠀⠀⠀•⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+  [#E5DCC8]⠀⠀⠀⠀⠀⠀brief · iterate · verify · ship ⠀⠀[/]
+  [bold #D49B4A]⠀⠀what are we building? ⠀⠀[/]
+  [dim #8A99A8]⠀⠀calm · practical · evidence-first ⠀⠀[/]
