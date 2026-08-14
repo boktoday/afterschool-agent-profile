@@ -49,17 +49,28 @@ needs it installed locally. No cloud TTS — Piper runs offline.
 
 ### What the student needs
 
-- A working Python 3.10 or 3.11 (NOT 3.10 from the Windows Store
+- A working Python 3.10 through 3.13 (NOT 3.10 from the Windows Store
   shim — use a real install). Verify with:
 
   ```bash
   python --version
   ```
 
-- The Piper binary. Two options:
+- The Piper binary. Three options:
 
-  - **Native binary** (recommended on Windows): pre-built
-    `piper.exe` shipped with OpenHuman at
+  - **Native binary (Linux):** shipped with this profile at
+    `/data/.hermes/bin/piper/piper`. Verify it exists and runs:
+
+    ```bash
+    /data/.hermes/bin/piper/piper --version
+    ```
+
+  - **Native binary (macOS):** typically at
+    `/opt/homebrew/bin/piper` (Homebrew) or `~/Library/Piper/piper`.
+    Verify with `piper --version`.
+
+  - **Native binary (Windows):** pre-built `piper.exe` shipped with
+    OpenHuman at
     `C:/Users/insig/.openhuman/bin/piper/piper/piper.exe`.
     Verify it exists and runs:
 
@@ -67,9 +78,9 @@ needs it installed locally. No cloud TTS — Piper runs offline.
     "/c/Users/insig/.openhuman/bin/piper/piper/piper.exe" --help
     ```
 
-  - **Python package** (Linux/macOS): `pip install piper-tts`.
-    Note: in this environment, the Python `piper` package is dead
-    in the Hermes venv. Use the native binary if available.
+  - **Python package (Linux/macOS):** `pip install piper-tts`.
+    Note: in the Hermes venv, the Python package may not be available.
+    Use the native binary if it exists on your system.
 
 ### Voice model download
 
@@ -171,11 +182,17 @@ through:
    TELEGRAM_CHAT_ID=<student's chat id>
    ```
 
-   The student can find their chat id by messaging
-   `@userinfobot` or by sending a message to the bot and reading
-   the `chat.id` from the bot's webhook update.
+2. **Start the bot.** After creating the token, the student must
+   open Telegram, find their new bot, and send it any message
+   (e.g. `/start` or just "hi"). A bot that has never received
+   a message cannot receive messages — Telegram will silently fail
+   on the first send.
 
-2. **Verify** the agent can send a test message:
+3. **Find the chat ID.** Message `@userinfobot` in Telegram. It
+   replies with the numeric chat ID. Add it to `.env` as
+   `TELEGRAM_CHAT_ID`.
+
+4. **Verify** the agent can send a test message:
 
    ```python
    import os, urllib.request

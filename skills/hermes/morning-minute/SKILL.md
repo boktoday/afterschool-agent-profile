@@ -71,6 +71,46 @@ Before generating, the agent must have:
 Never skip the audio. Never skip the text. The student is meant to
 do both — listen and read.
 
+## Step 0 — Load credentials from the profile `.env`
+
+Cron runs in a fresh subprocess with no chat context. The token
+landed on the wrong Telegram bot during one real run because the
+fresh process inherited a stale env var from elsewhere. **Always
+load the profile's `.env` into `os.environ` before reading any
+credential.** Do this *before* anything else in this skill.
+
+```python
+import os, pathlib
+from pathlib import Path
+
+ENV_PATH = Path("/data/.hermes/profiles/afterschool-agent/.env")
+if ENV_PATH.exists():
+    for raw in ENV_PATH.read_text().splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, _, v = line.partition("=")
+        v = v.strip().strip('"').strip("'")
+        os.environ.setdefault(k, v)  # never overwrite an already-set value
+```
+
+After loading, sanity-check the essentials before doing any
+network work:
+
+```python
+for required in ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID",
+                  "HERENOW_API_KEY", "JINA_API_KEY"):
+    if not os.environ.get(required):
+        raise RuntimeError(
+            f"Missing required credential: {required}. "
+            "Add it to /data/.hermes/profiles/afterschool-agent/.env."
+        )
+```
+
+The first `sendMessage` against `TELEGRAM_BOT_TOKEN` after loading
+acts as the live smoke test — a 401 here means the token in `.env`
+is wrong or revoked, not a code bug.
+
 ## Step 1 — Pick the day's essential and lesson
 
 Default cycle: rotate through the eight essentials one per day, in
@@ -199,82 +239,163 @@ Sanity check the output: ~250 to ~450 KB and ~60 to ~120 s. A
 result under 200 KB or under 45 s suggests the TTS input was
 truncated.
 
-## Step 6 — Upload to here.now and deliver
+## Step 6 — Publish to here.now (optional archival path)
 
-Both Telegram and WhatsApp need a **public URL** to render an
-inline audio player. Local Windows paths do not render. Upload to
-the user's here.now drive first.
+here.now is a **site publisher**, not a generic drive. The flow is
+manifest-then-presigned-PUT-then-finalize, which gives a public
+URL of the form `https://<slug>.here.now/<path>`. Use it for
+archival (the day's audio stays at a stable URL you can link in
+the archive), not for primary Telegram delivery — see Step 7.
 
 ```python
-import urllib.request, json, hashlib, ssl
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
+import urllib.request, json, hashlib, os
 
-# Read here.now credentials
-API_KEY = open(r"C:\Users\insig\.herenow\credentials").read().strip()
-DRIVE_ID = "drv_01kq8g6hkfmnmfqngr18xyx3mb"  # user may have a different drive
+API_KEY = os.environ.get("HERENOW_API_KEY", "")
 BASE = "https://here.now"
-h = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
+CLIENT = "afterschool-agent/morning-minute"
 
-ogg_path = r"C:\Users\insig\morning-minute-today.ogg"
-drive_path = "afterschool/morning-minute-today.ogg"
+ogg_path = "/path/to/morning-minute-today.ogg"
+remote_path = f"afterschool/morning-minute-{os.environ.get('DATE','today')}.ogg"
 
 with open(ogg_path, "rb") as f:
     data = f.read()
 
-# Stage + upload + finalize + publish
-list_url = f"{BASE}/api/v1/drives/{DRIVE_ID}/files?prefix={drive_path}&limit=10"
-req = urllib.request.Request(list_url, headers={"Authorization": f"Bearer {API_KEY}"})
-with urllib.request.urlopen(req, context=ctx, timeout=15) as r:
-    existing = next((f for f in json.loads(r.read()).get("files", []) if f["path"] == drive_path), None)
+# 1. Create site (manifest)
+manifest = {
+    "files": [
+        {"path": remote_path, "size": len(data),
+         "contentType": "audio/ogg",
+         "hash": hashlib.sha256(data).hexdigest()}
+    ],
+    "displayName": f"Morning Minute {os.environ.get('DATE','today')}",
+    "displayDescription": "Daily Morning Minute audio for the Afterschool Agent student.",
+}
+req = urllib.request.Request(
+    f"{BASE}/api/v1/publish",
+    data=json.dumps(manifest).encode(),
+    headers={"Authorization": f"Bearer {API_KEY}",
+             "X-HereNow-Client": CLIENT,
+             "Content-Type": "application/json"},
+    method="POST",
+)
+with urllib.request.urlopen(req, timeout=30) as r:
+    site = json.loads(r.read())
 
-stage = {"path": drive_path, "size": len(data), "contentType": "audio/ogg", "sha256": hashlib.sha256(data).hexdigest()}
-stage["ifMatch" if existing else "ifNoneMatch"] = existing["etag"] if existing else "*"
-req = urllib.request.Request(f"{BASE}/api/v1/drives/{DRIVE_ID}/files/uploads", data=json.dumps(stage).encode(), headers=h, method="POST")
-with urllib.request.urlopen(req, context=ctx, timeout=30) as r:
-    sd = json.loads(r.read())
+# 2. PUT each file to its presigned URL
+upload = site["upload"]
+for f in upload["uploads"]:
+    if f["path"] != remote_path:
+        continue
+    req = urllib.request.Request(
+        f["url"], data=data,
+        headers={"Content-Type": "audio/ogg", **f.get("headers", {})},
+        method="PUT",
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        assert r.status == 200, f"PUT failed: {r.status}"
 
-req = urllib.request.Request(sd["uploadUrl"], data=data, headers={"Content-Type": "audio/ogg"}, method="PUT")
-with urllib.request.urlopen(req, context=ctx, timeout=60) as r:
-    print(f"Upload: {r.status}")
+# 3. Finalize
+req = urllib.request.Request(
+    upload["finalizeUrl"],
+    data=json.dumps({"versionId": upload["versionId"]}).encode(),
+    headers={"Authorization": f"Bearer {API_KEY}",
+             "X-HereNow-Client": CLIENT,
+             "Content-Type": "application/json"},
+    method="POST",
+)
+with urllib.request.urlopen(req, timeout=30) as r:
+    r.read()
 
-fin = {"uploadId": sd["uploadId"]}
-req = urllib.request.Request(f"{BASE}/api/v1/drives/{DRIVE_ID}/files/finalize", data=json.dumps(fin).encode(), headers=h, method="POST")
-with urllib.request.urlopen(req, context=ctx, timeout=30) as r:
-    print("Finalized")
-
-pub = {"driveId": DRIVE_ID}
-req = urllib.request.Request(f"{BASE}/api/v1/publish/from-drive", data=json.dumps(pub).encode(), headers=h, method="POST")
-with urllib.request.urlopen(req, context=ctx, timeout=60) as r:
-    pd = json.loads(r.read())
-    ogg_url = f"{pd['siteUrl'].rstrip('/')}/{drive_path}"
-    print(f"Public URL: {ogg_url}")
+ogg_url = f"{site['siteUrl'].rstrip('/')}/{remote_path}"
 ```
+
+**Caveats discovered in real use:**
+
+- The `DRIVE_ID` env var is **not used by the publish API** (the
+  publish API doesn't accept a drive parameter). Sites are scoped
+  to your account, not a drive. Treat `HERENOW_DRIVE_ID` as
+  legacy/orphan and ignore it on the publish path.
+- here.now serves the file fine with a browser User-Agent but
+  Cloudflare **HTTP 403 (error 1010)** blocks default bot UAs
+  (including Telegram's fetch bot). **Don't deliver to Telegram
+  via `media_url` from here.now** — use Step 7's multipart path.
 
 ## Step 7 — Deliver in the channel
 
-The delivery pattern depends on the channel:
+The delivery pattern depends on the channel.
 
-### Telegram
+### Telegram — voice bubble (recommended for Morning Minute)
+
+The Morning Minute is a spoken message. Telegram renders
+OGG/Opus files sent via `sendVoice` as a **voice bubble with
+waveform** — friendlier UI than the audio player, smaller files
+(~10× smaller than Piper's WAV), and Telegram reports the
+duration correctly. Always deliver via multipart upload (Step 6
+URLs hit Cloudflare 1010 from Telegram's fetch bot).
 
 ```python
-telegram(
-    chat_id=os.environ["TELEGRAM_CHAT_ID"],
-    text=plan_text_with_intro,
-    media_url=ogg_url,
+import urllib.request, json, uuid, os
+
+BOT = os.environ["TELEGRAM_BOT_TOKEN"]
+CHAT = os.environ["TELEGRAM_CHAT_ID"]
+
+ogg_path = "/path/to/morning-minute-today.ogg"
+caption_text = "Morning Minute — <DATE>. Listen, then read the plan below."
+
+boundary = uuid.uuid4().hex
+parts = []
+for k, v in [
+    ("chat_id", CHAT),
+    ("caption", caption_text),
+]:
+    parts.append(f'--{boundary}\r\n'
+                 f'Content-Disposition: form-data; name="{k}"\r\n\r\n{v}\r\n'.encode())
+fname = os.path.basename(ogg_path)
+parts.append(
+    f'--{boundary}\r\n'
+    f'Content-Disposition: form-data; name="voice"; filename="{fname}"\r\n'
+    f'Content-Type: audio/ogg\r\n\r\n'.encode()
 )
+with open(ogg_path, "rb") as f:
+    parts.append(f.read())
+parts.append(f"\r\n--{boundary}--\r\n".encode())
+
+req = urllib.request.Request(
+    f"https://api.telegram.org/bot{BOT}/sendVoice",
+    data=b"".join(parts),
+    headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+    method="POST",
+)
+with urllib.request.urlopen(req, timeout=60) as r:
+    out = json.loads(r.read())
+assert out["ok"], out
+
+# Then send the plain-text plan below the voice bubble:
+text_body = "<full plan text — callback, essential, action, tradition line, closer>"
+req = urllib.request.Request(
+    f"https://api.telegram.org/bot{BOT}/sendMessage",
+    data=json.dumps({"chat_id": CHAT, "text": text_body,
+                      "disable_web_page_preview": True}).encode(),
+    headers={"Content-Type": "application/json"},
+    method="POST",
+)
+with urllib.request.urlopen(req, timeout=30) as r:
+    out = json.loads(r.read())
+assert out["ok"], out
 ```
 
-The Telegram adapter renders the `media_url` as an inline audio
-player. The text arrives below the player.
+If `sendVoice` fails (very rare; OGG is universally supported),
+fall back to `sendAudio` with the same multipart body but the
+field name `audio` instead of `voice` — that gives the standard
+inline audio player instead of a voice bubble.
 
 ### WhatsApp
 
 WhatsApp delivery uses the WhatsApp Business API (or a personal
 bridge like Baileys). The orientation skill walks the student
-through this. The pattern is the same: send a media message with
-the public URL and the text below.
+through this. The pattern: multipart-upload the OGG via the
+provider's media endpoint, then send a text message with the
+caption + plan body.
 
 ## Step 8 — Archive (optional but recommended)
 

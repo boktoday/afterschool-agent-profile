@@ -161,6 +161,9 @@ Ask:
 - "What would you like to call me?" (default suggestion: *the
   Afterschool Agent*, or whatever the user prefers).
 - "If the agent is for a student, what should it call them?"
+- "How old is the student?" (this helps calibrate advice and
+  safety gates — a 13-year-old and a 17-year-old have different
+  autonomy needs).
 - "Do you prefer concise, conversational, formal, or highly
   detailed replies?"
 
@@ -183,9 +186,17 @@ later, but lessons will branch from this point.
 
 Hand off to the **`setup-walkthrough` skill**. That skill walks the
 user through installing Piper (or verifying the existing native
-binary), picking a voice (UK male Alan, UK female Jenny Dioco, US
-female Amy, US male Joe, AU female Natasha are the common picks),
-and verifying with a test synthesis.
+binary), picking a voice, and verifying with a test synthesis.
+
+**Ask the student which voice they want to wake up to:**
+
+> "Which voice should Anna wake up to each morning? Here are the
+> options: US male (Joe), US female (Amy), UK male (Alan), UK
+> female (Jenny Dioco), or Australian female (Natasha)."
+
+Don't default to Joe silently — make the choice explicit. The voice
+the student picks shapes whether they actually listen to the Morning
+Minute.
 
 The agent does NOT ask for keys or tokens in chat. It walks the
 user to where they add things themselves.
@@ -299,6 +310,9 @@ Ask for:
 ### Token Router (optional)
 
 Mention the optional Hermes Token Router and offer to enable it.
+
+Explain it plainly: *"The Token Router narrows the tools the agent can use by default. It doesn't hide anything from you — you can still ask anything. It just keeps the agent from wandering into things like code execution or data analysis when you just want a conversation about the day's essential. If token usage is a concern, turn it on. If you want the full surface available, leave it off."*
+
 See the README for the manual enable steps if the user declines.
 
 ## Phase 2 — Present the setup plan
@@ -311,6 +325,7 @@ Proposed setup
 Identity:
 - Call you: <name>
 - Call the student: <student name>
+- Student age: <age>
 - Call me: <assistant name>
 - Reply style: <style>
 
@@ -338,6 +353,9 @@ Memory:
 
 Integrations:
 - Obsidian / Notion / GitHub / none
+
+Token Router:
+- Enabled / Disabled
 
 Scheduled jobs:
 - Morning Minute at <time> in <timezone>, <days>
