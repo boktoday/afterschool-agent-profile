@@ -131,19 +131,37 @@ approval.
 
 ### The twenty daily prompts
 
-Beyond the Morning Minute and the Check-In, the student has a small
-library of go-to questions they can ask at any time. They live at
-`essentials/00-introduction/lessons/prompts.md` and rotate through all
-eight essentials — so the student practises all eight without having
-to remember which essential they are on.
+A small library of go-to questions a teenager can put to the
+Afterschool Agent at any time. The agent reads the relevant guide
+chapter, draws on what it already knows about the student, and
+answers in their voice, in their tradition.
 
-Some prompts are daily rituals, some are weekly reflection, a few are
-**heavy questions** used rarely. The agent reads the file when the
-student asks for "something to think about," a question to sit with,
-or help getting unstuck. The agent does not paste prompts at the
-student — it references them and holds space for the answer.
+The point is **not** to answer all twenty each day. The point is
+to have a small set of go-to prompts that surface the essentials,
+draw out reflection, and turn curiosity into a daily practice.
+Pick one or two. Skip the rest. Rotate through the week.
 
-| Student energy | Suggested prompts |
+The prompts are written in the teen's voice. The agent does not
+lecture back. It asks the question, holds space for the answer,
+and follows up with one small action.
+
+The full prompts file lives at
+`essentials/00-introduction/lessons/prompts.md`. The agent reads
+it when the student asks for "something to think about," a
+question to sit with, or help getting unstuck.
+
+#### By mode
+
+| Mode | Prompts |
+|---|---|
+| Self-reflection | #1, #3, #6, #7, #12, #15, #16, #20 |
+| Activity | #2, #9, #13, #14, #17, #19 |
+| Critical thinking | #5, #8, #10, #18 |
+| Daily ritual | #11, #16, #20 |
+
+#### By energy
+
+| Energy | Suggested prompts |
 |---|---|
 | Tired, low | #1, #20, #11 |
 | Wired, curious | #5, #10, #14 |
@@ -151,9 +169,64 @@ student — it references them and holds space for the answer.
 | Want to think | #4, #6, #16, #18 |
 | Want to do | #2, #9, #13, #17, #19 |
 
-See `essentials/00-introduction/lessons/prompts.md` for the full list,
-and `skills/afterschool/eight-essentials-curriculum/SKILL.md` for how
-the agent uses them.
+#### By essential (every essential surfaces at least twice)
+
+| Essential | Prompts that lean into it |
+|---|---|
+| Silence | #1, #7, #9, #12, #16 |
+| Body | #2, #9, #14, #19 |
+| Skills | #8, #13, #14 |
+| Digital Self-Defence | #4, #8, #18 |
+| Real Community | #6, #15, #17 |
+| Knowledge Without Wi-Fi | #3, #6, #8, #10, #11 |
+| Nature | #9, #19 |
+| Tested Faith | #1, #5, #7, #10, #16, #18 |
+
+#### Heavy prompts (use rarely)
+
+Prompts **#1**, **#5**, **#10**, and **#18** are heavy. The agent
+never leans on them. The student must ask for them by name. If
+the student asks for a heavy prompt and the agent judges it is
+the wrong day, the agent may gently offer a lighter alternative
+and explain why.
+
+#### The twenty
+
+| # | Question | Mode | Energy | Essentials |
+|---|----------|------|--------|------------|
+| 1 | Ask me one question that I probably don't want to answer, but should. | Self-reflection | Tired / low | All eight (esp. Tested Faith, Silence) |
+| 2 | Give me a 10-minute task that will make me uncomfortable in a useful way. | Activity | Want to do | Body, Silence, Tested Faith |
+| 3 | What did I do three days ago that I haven't done since? Why? | Self-reflection | Stuck / flat | Self-knowledge, Knowledge Without Wi-Fi |
+| 4 | Pick one essential I'm weakest at. What's the smallest practice I could do today? | Critical thinking | Want to think | All eight (diagnostic) |
+| 5 | Argue against my last decision. What would a wise critic say? | Critical thinking | Wired / curious | Knowledge Without Wi-Fi, Tested Faith |
+| 6 | If I had to teach a Year 7 student one thing I've learned this year, what should it be? | Self-reflection | Want to think | Knowledge Without Wi-Fi, Real Community |
+| 7 | Where in my life am I performing instead of actually doing? Where am I actually doing instead of performing? | Self-reflection | Tired / low | Tested Faith, Silence |
+| 8 | What am I currently outsourcing that I should be building myself? | Critical thinking | Want to think | Skills, Digital Self-Defence, Knowledge Without Wi-Fi |
+| 9 | Give me a 30-minute activity that requires no phone and no one else. | Activity | Stuck / flat | Body, Silence, Nature |
+| 10 | What is one belief I hold that I couldn't defend if pressed? Should I keep it anyway? | Critical thinking | Wired / curious | Tested Faith, Knowledge Without Wi-Fi |
+| 11 | Quiz me on something I've forgotten I used to know. | Daily ritual | Tired / low | Knowledge Without Wi-Fi |
+| 12 | Ask me about the last time I was genuinely bored, and what I noticed in the silence. | Self-reflection | Stuck / flat | Silence, Body |
+| 13 | Suggest one thing I could finish today that I started more than a week ago. | Activity | Want to do | Skills, Tested Faith |
+| 14 | Walk me through how to do something practical I don't know how to do yet — feed myself, fix a puncture, write a CV, change a tyre. | Activity | Wired / curious | Skills, Body |
+| 15 | Who in my life would show up at 2am? Who wouldn't? Why? | Self-reflection | Stuck / flat | Real Community |
+| 16 | Compare how I spent my time today vs how I said I wanted to spend it. Where's the gap? | Daily ritual | Want to think | Tested Faith, Silence |
+| 17 | Give me a conversation starter I could use with one person I haven't spoken to properly in a while. | Activity | Want to do | Real Community |
+| 18 | If I deleted every app on my phone except three, which three should stay and why? | Critical thinking | Want to think | Digital Self-Defence, Tested Faith |
+| 19 | Walk me outside for 15 minutes — what should I actually look at, listen for, notice? | Activity | Want to do | Nature, Body, Silence |
+| 20 | End the day with me. Three things that happened, three things I noticed, one thing I'm grateful for. | Daily ritual | Tired / low | All eight (closing the day) |
+
+#### How the agent uses them
+
+The agent reads
+`essentials/00-introduction/lessons/prompts.md` whenever the student
+asks for a prompt. It does **not** paste prompts at the student. It
+references one, invites the student to read it, and holds space
+for the answer. It never asks three prompts in a row.
+
+In **sequential** delivery order, prompts naturally cluster around
+the essential the student is on. In **randomised** order, the
+agent picks the prompt that matches the moment. All eight
+essentials remain available in both modes.
 
 ---
 
