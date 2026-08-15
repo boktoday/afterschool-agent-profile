@@ -292,16 +292,19 @@ Here is what it covers, in order:
 
 | Step | What happens | Where you add things |
 |---|---|---|
-| 1. Identity | Names (yours, the student's), reply style | Stored in profile memory |
-| 2. Tradition | Christian or Universal | Stored in profile memory |
-| 3. Piper install + voice | Verifies Piper works, picks a voice, downloads the model | Model in `piper-voices/` |
-| 4. Jina API key | Sign up free, add to `.env`, agent verifies with a real search | `JINA_API_KEY=` in `.env` |
-| 5. Delivery channel | Telegram bot credentials | `TELEGRAM_BOT_TOKEN=` / `TELEGRAM_CHAT_ID=` in `.env` |
-| 6. Eight Essentials guide | Confirms lesson MD files are in `essentials/01..08/lessons/` | Files in the repo |
-| 7. Memory | Mnemosyne recommended (local-first, no external account) | `hermes memory setup` |
-| 8. Morning Minute schedule | Time, timezone, days (every day or school days) | Created as a cron job |
-| 9. Afterschool Check-In schedule | Time, timezone, days | Created as a cron job |
-| 10. Token Router (optional) | The plugin that narrows the tool surface | `plugins.enabled` in `config.yaml` |
+| Step | What happens | Where you add things |
+|---|---|---|
+| 1. Identity | Names (yours, the student's, the agent's), reply style | Stored in the profile memory |
+| 2. Profile and life | Age, location, living situation, week shape, 3 interests, focus goal, friendship circle, blocker, off-limits — the fields the agent uses to tailor the Morning Minute and lessons | Stored in profile memory |
+| 3. Tradition | Christian or Universal | Stored in profile memory |
+| 4. Piper install + voice | Verifies Piper works, picks a voice, downloads the voice model | Voice model in `piper-voices/` |
+| 5. Jina API key | Sign up free, add to `.env`, agent verifies with a real search | `JINA_API_KEY=` in `.env` |
+| 6. Delivery channel | Telegram or WhatsApp bot credentials | `TELEGRAM_BOT_TOKEN=` / `WHATSAPP_*` in `.env` |
+| 7. Eight Essentials guide | Confirms the lesson MD files are in `essentials/01..08/lessons/` | Files in the repo |
+| 8. Memory | Mnemosyne recommended (local-first, no external account) | `hermes memory setup` |
+| 9. Morning Minute schedule | What time, what timezone, what days | Created as a cron job |
+| 10. Afterschool Check-In schedule | What time, what timezone, what days | Created as a cron job |
+| 11. Token Router (optional) | The plugin that narrows the tool surface | `plugins.enabled` in `config.yaml` |
 
 At the end the agent shows a **Proposed setup** summary and waits for
 your explicit approval before applying anything.

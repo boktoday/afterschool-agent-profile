@@ -83,7 +83,36 @@ both).
 If neither branch file exists but a base `03-the-two-minute-practice.md`
 does, use that.
 
-### Step 3 — Synthesise, don't repeat
+### Step 3 — Read the student's profile and tailor
+
+Before drafting a lesson, pull these from Mnemosyne:
+
+- `student_age` — calibrate language, autonomy, and activity length.
+- `location` — recommend local places for Nature, set the
+  weather/season context.
+- `interests` — three things the student is into right now. Pick
+  examples that reference the student's actual life (a Skills
+  example that mentions their sport, not a generic one).
+- `focus_goal` — what the student wants different in three
+  months. Lead with the essential that serves that goal. If
+  the goal is "sleep better", lead with Body, not Silence.
+- `friendship_circle` — for the Real Community chapter. Don't
+  lecture; ask one good question that meets them where they are
+  (online only, mostly alone, big family).
+- `blocker` — what's getting in the way. Honour it without
+  diagnosing. Don't recommend a Body activity that requires
+  money if the blocker is "no money". Don't recommend a
+  Community outreach if the blocker is "anxiety around new
+  people".
+- `off_limits` — check before recommending any Scripture quote,
+  any conversation starter, any community suggestion.
+
+If any of these are missing, the agent should ask the student
+naturally during the conversation, not interrogate. The
+onboarding skill captures most of them; the rest accumulate over
+time as the student chats.
+
+### Step 4 — Synthesise, don't repeat
 
 The lesson files are the **source of truth**, but the agent's
 job is to teach, not to read aloud. Synthesise:

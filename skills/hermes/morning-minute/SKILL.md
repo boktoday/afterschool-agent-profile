@@ -126,6 +126,33 @@ order, branching by tradition if `<file>.christian.md` or
 Track which lesson files you have read for this student in memory
 (`hermes memory store`) so you do not repeat them within ~30 days.
 
+**Tailor to the student's profile.** Before drafting, pull these
+from Mnemosyne (set during onboarding, updateable any time):
+
+- `focus_goal` — the one thing the student wants different in
+  three months. If it points at one essential strongly, weight
+  the rotation toward that essential. Don't force it — the goal
+  may say "sleep better" (Body) but the student still needs
+  Silence, Community, etc.
+- `interests` — three things the student is into right now.
+  Pick examples that reference the student's actual life. A
+  Skills example that mentions their sport lands better than a
+  generic one.
+- `student_age` — calibrate language and autonomy.
+- `location` — recommend local places for Nature, set the
+  weather/season context (winter in Melbourne is different from
+  winter in Singapore).
+- `blocker` — what's getting in the way. Don't recommend an
+  activity that the blocker makes impossible. Don't lecture
+  about the blocker.
+- `off_limits` — check before recommending any Scripture quote,
+  any conversation starter, any community suggestion. Honour
+  silently.
+
+If any field is missing, the agent uses neutral defaults and
+notes the assumption in the plan. The student can fill in missing
+fields later by chatting.
+
 ## Step 2 — Compose the plan text (~120 to ~200 words)
 
 The plan has three parts. Read each aloud as you draft it, because

@@ -170,6 +170,74 @@ Ask:
 If the user skips a question, use a neutral default and say what
 was assumed.
 
+### Profile and life
+
+This is where the agent learns enough about the student to actually
+tailor the work. Without this section the Morning Minute, the
+check-in, and the lesson selection are all generic. With it, the
+agent can recommend the local park for Nature, name a friend the
+student could reach out to for Community, or notice that the
+student's Body question is really a sleep question because they
+mentioned late-night studying.
+
+Ask the questions in three small groups. Do not present all ten at
+once.
+
+#### Group 1 — Basics
+
+- "How old is the student?" (or "what year/grade are they in?").
+  Used to calibrate autonomy gates — a 13-year-old and a 17-year-old
+  have different autonomy needs, different activities, and
+  different language. If the parent is the one answering and the
+  student is older, the parent should still answer the basics so
+  the agent gets them right.
+- "Where do they live — city or town, and country?" Enough to
+  recommend local places for Nature, set the right time zone, and
+  (later) suggest meet-ups. No street address. No precise location.
+- "What's the living situation — parents, siblings, or on their
+  own?" Used to know when to bring a parent into a setup step (the
+  parent-gate rule), and to set the right tone for the family
+  briefing later.
+- "What's their week look like — school, work, both, neither?" Used
+  to set realistic defaults for the Morning Minute and check-in
+  schedules, and to know when "weekday only" makes sense.
+
+#### Group 2 — What they care about
+
+- "What are they into right now? Three things, however small."
+  Hobbies, sports, music, games, causes, fandoms, classes they
+  actually like. The agent uses these to pick examples for every
+  chapter (a Skills example that mentions the student's sport
+  lands better than one that doesn't) and to suggest Body
+  activities that fit the student's actual life.
+- "What's one thing they want to be different about themselves in
+  three months? Anything, however small." This becomes the
+  student's *focus goal*. The agent picks which essential to lead
+  with, which daily prompt to surface, and which activity to
+  recommend. The student can change it later.
+- "Who do they spend time with — friends, family, online, mostly
+  alone?" Used for the Real Community chapter. The agent does
+  *not* lecture about friendship. It asks one good question and
+  honours the answer.
+
+#### Group 3 — What's getting in the way (and what's off-limits)
+
+- "What's getting in the way of the things they want? Honestly."
+  This is the most useful single question. Sleep, screens, anxiety,
+  a person, no money, no time, no idea where to start — the answer
+  tells the agent which essential to lead with and which activity
+  to skip. The agent honours the answer without diagnosing or
+  lecturing.
+- "Anything I should *not* bring up — topics, people, situations?"
+  Stored in memory. The agent checks this before recommending any
+  Scripture quote, any conversation starter, any community
+  suggestion. Off-limits is honoured silently.
+
+If a question gets skipped, use the neutral default (age → "teen",
+location → "your area", and so on) and tell the student what was
+assumed. Don't push. The student can fill in missing fields later by
+chatting.
+
 ### Tradition (the most important early choice)
 
 Ask:
@@ -363,6 +431,17 @@ Identity:
 - Call me: <assistant name>
 - Reply style: <style>
 
+Profile:
+- Student age / year: <age or year>
+- Location: <city/town, country>
+- Living situation: <parents / siblings / on their own>
+- Week: <school / work / both / neither>
+- Into right now: <3 things>
+- Focus goal (3 months): <one thing to change>
+- Friendship circle: <friends / family / online / mostly alone>
+- Getting in the way: <honest answer or "skipped">
+- Off-limits: <topics/people/situations or "none">
+
 Tradition:
 - Christian / Universal
 
@@ -411,23 +490,27 @@ user changes one item, revise the plan and request approval again.
 Apply only the approved items, in this order:
 
 1. Identity and style in the active profile.
-2. Tradition in the active profile memory (writes a `tradition`
+2. Profile and life fields in the active profile memory (writes
+   `student_age`, `location`, `living_situation`, `week_shape`,
+   `interests`, `focus_goal`, `friendship_circle`, `blocker`,
+   `off_limits` keys in Mnemosyne).
+3. Tradition in the active profile memory (writes a `tradition`
    key in Mnemosyne).
-3. Piper voice path in the active profile memory.
-4. Jina key in `.env` (user adds it themselves; agent verifies).
-5. Delivery channel credentials in `.env` (user adds them
+4. Piper voice path in the active profile memory.
+5. Jina key in `.env` (user adds it themselves; agent verifies).
+6. Delivery channel credentials in `.env` (user adds them
    themselves; agent verifies with a test message).
-6. Guide MD files in `essentials/<NN-name>/lessons/` (user drops
+7. Guide MD files in `essentials/<NN-name>/lessons/` (user drops
    them in; agent lists the folder to confirm).
-7. Memory choice with `hermes config set` or `hermes memory setup`.
-8. Approved skill or integration setup, pausing at all credential
+8. Memory choice with `hermes config set` or `hermes memory setup`.
+9. Approved skill or integration setup, pausing at all credential
    and permission gates.
-9. Toolset selection through `hermes tools` if a persistent
-   capability change is required.
-10. Existing cron inventory with `cronjob(action="list")`.
-11. New scheduled jobs using the Morning Minute and Afterschool
+10. Toolset selection through `hermes tools` if a persistent
+    capability change is required.
+11. Existing cron inventory with `cronjob(action="list")`.
+12. New scheduled jobs using the Morning Minute and Afterschool
     Check-In templates below.
-12. A final readback and concise status report.
+13. A final readback and concise status report.
 
 After each action, verify its actual result.
 
@@ -586,7 +669,10 @@ again.
 
 ## Verification checklist
 
-- [ ] Identity and tradition were confirmed before being written.
+- [ ] Identity, profile and life, and tradition were confirmed
+      before being written. Profile fields (age, location, hobbies,
+      focus goal, friendship circle, blocker, off-limits) all
+      landed in Mnemosyne with the student's approval.
 - [ ] Piper voice was verified with a test synthesis.
 - [ ] Jina API key was verified with a real search.
 - [ ] Delivery channel was verified with a test message.
