@@ -112,6 +112,32 @@ Two cron jobs, both off until the student approves them at onboarding:
 Both are **opt-in** — the orientation creates them only after explicit
 approval.
 
+### The twenty daily prompts
+
+Beyond the Morning Minute and the Check-In, the student has a small
+library of go-to questions they can ask at any time. They live at
+`essentials/00-introduction/lessons/prompts.md` and rotate through all
+eight essentials — so the student practises all eight without having
+to remember which essential they are on.
+
+Some prompts are daily rituals, some are weekly reflection, a few are
+**heavy questions** used rarely. The agent reads the file when the
+student asks for "something to think about," a question to sit with,
+or help getting unstuck. The agent does not paste prompts at the
+student — it references them and holds space for the answer.
+
+| Student energy | Suggested prompts |
+|---|---|
+| Tired, low | #1, #20, #11 |
+| Wired, curious | #5, #10, #14 |
+| Stuck or flat | #3, #9, #15 |
+| Want to think | #4, #6, #16, #18 |
+| Want to do | #2, #9, #13, #17, #19 |
+
+See `essentials/00-introduction/lessons/prompts.md` for the full list,
+and `skills/afterschool/eight-essentials-curriculum/SKILL.md` for how
+the agent uses them.
+
 ---
 
 ## The setup workflow

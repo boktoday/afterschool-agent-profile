@@ -98,6 +98,80 @@ Then teach. Don't paraphrase the lesson file at length. Don't
 quote it verbatim and pretend that's teaching. The student can
 read.
 
+## The twenty daily prompts
+
+A short library of questions a teenager can ask at any time. Lives at
+`essentials/00-introduction/lessons/prompts.md`. Read it once when this
+skill first loads, then use it as a go-to resource whenever the
+student asks for a prompt, a question to sit with, or "something to
+think about today."
+
+### When to read the prompts file
+
+- The student says "give me something to think about" or
+  "ask me a question."
+- The student asks for a daily practice beyond the Morning Minute.
+- The student asks for help getting unstuck.
+- The check-in needs a follow-up and the standard reflection feels
+  thin.
+
+### How to use them
+
+| Student energy | Suggested prompts |
+|---|---|
+| Tired, low | #1, #20, #11 |
+| Wired, curious | #5, #10, #14 |
+| Stuck or flat | #3, #9, #15 |
+| Want to think | #4, #6, #16, #18 |
+| Want to do | #2, #9, #13, #17, #19 |
+
+The prompts touch every essential across the list, so the student
+practises all eight without having to remember which essential they
+are on.
+
+### Heavy prompts
+
+Prompts 1, 5, 10, and 18 are heavy. The agent never leans on them.
+The student must ask for them by name. If the student asks for a
+heavy prompt and the agent judges it is the wrong day, the agent may
+gently offer a lighter alternative and explain why. Heavy prompts are
+tools, not weapons.
+
+### Reading the file
+
+```bash
+ls essentials/00-introduction/lessons/
+# Should show: christian.md  universal.md  prompts.md  README.md
+```
+
+If `prompts.md` is missing, the prompts list is not available.
+Politely tell the student and offer to load it from the upstream
+profile (`git pull`).
+
+### Synthesise, don't read aloud
+
+The prompts are written for the student to **read themselves** — the
+file is part of the guide the student owns. The agent's job is to
+**reference** a prompt, invite the student to read it, and then hold
+space for the answer. Do not paste a prompt at length and pretend
+that is teaching. Do not ask three prompts in a row.
+
+### Branching by tradition
+
+The prompts file is tradition-neutral. The agent responds in the
+student's tradition — Christian or Universal — based on the
+onboarding memory.
+
+### What the prompts file is not
+
+- It is not a checklist. The student picks one or two and rotates.
+- It is not a script. The agent is not required to use any of them.
+- It is not exhaustive. It is a starting set; the student may add
+  their own prompts in their check-ins, and the agent should honour
+  those too.
+
+---
+
 ## Teaching an essential
 
 ### Silence
