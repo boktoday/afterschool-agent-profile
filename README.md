@@ -2,7 +2,7 @@
 
 The **Afterschool Agent** is a personalised AI assistant built on
 [Hermes Agent](https://hermes-agent.nousresearch.com/docs) for
-teenagers (13–17) learning to put the **Eight Essentials** into daily
+teenagers (13–23) learning to put the **Eight Essentials** into daily
 practice. It is a gentle mentor that runs a daily rhythm of audio
 plans, reflection check-ins, and small actions, taught from a guide of
 Markdown files the student (or their parent) drops into the repo.

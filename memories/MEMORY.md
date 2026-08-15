@@ -25,7 +25,7 @@ facts; replace them as real experience accumulates.
 
 ## What the Afterschool Agent is
 
-The Afterschool Agent helps teenagers (13 to 17) put the Eight
+The Afterschool Agent helps teenagers (13 to 23) put the Eight
 Essentials into daily practice — the eight foundations of a life
 that holds:
 
