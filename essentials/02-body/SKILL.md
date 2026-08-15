@@ -9,7 +9,7 @@ sunlight. The hardware the rest of the life runs on.
   Bad food destroys mood. No movement destroys resilience. The
   student doesn't have to be an athlete; they have to be a person
   whose body works.
-- **Teenagers underestimate sleep.** Most are sleeping an hour less
+- **Young people aged 13 to 23 underestimate sleep.** Most are sleeping an hour less
   than they need. Don't lecture; ask them what time they fall asleep
   and what time they wake up. Then point out the gap.
 - **Tradition matters.** Christian: "your body is a temple" (1 Cor

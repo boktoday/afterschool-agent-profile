@@ -9,7 +9,7 @@ reading. Not rented knowledge from a feed.
   phone told you is one dead battery away from gone. The student
   needs at least one area of knowledge they own — a body of facts
   they can recall with the phone off.
-- **Reading builds the memory palace.** A teenager who reads for
+- **Reading builds the memory palace.** A young person aged 13 to 23 who reads for
   thirty minutes a day will know things their peers don't.
 - **Tradition matters.** Christian: "study to show thyself approved"
   (2 Tim 2:15). Universal: the discipline of knowing things for

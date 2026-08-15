@@ -1,6 +1,6 @@
 # Twenty prompts — questions to ask your agent on any given day
 
-A small library of questions a teenager can put to the Afterschool
+A small library of questions a young person aged 13 to 23 can put to the Afterschool
 Agent at any time. The agent reads the relevant guide chapter, draws
 on what it already knows about the student, and answers in their
 voice, in their tradition.
@@ -10,7 +10,7 @@ have a small set of go-to prompts that surface the essentials, draw
 out reflection, and turn curiosity into a daily practice. Pick one
 or two. Skip the rest. Rotate through the week.
 
-The prompts are written in the teen's voice. The agent does not
+The prompts are written in the young person aged 13 to 23's voice. The agent does not
 lecture back. It asks the question, holds space for the answer,
 and follows up with one small action.
 
@@ -107,7 +107,7 @@ is thin, the agent asks one follow-up question, not three.
 
 > *Touches Tested Faith, Silence.*
 
-A double-edged prompt. Most teenagers perform more than they
+A double-edged prompt. Most young people aged 13 to 23 perform more than they
 realise and do less than they think. The agent helps the student
 see both sides. It does not name the answer for them. It asks.
 
@@ -155,7 +155,7 @@ point is to keep owned knowledge warm.
 
 > *Touches Silence, Body.*
 
-A memory prompt. Most teenagers cannot remember the last time
+A memory prompt. Most young people aged 13 to 23 cannot remember the last time
 they were bored. The agent gently surfaces the question, listens,
 and reflects back. The student may not have a clear answer —
 that is fine. The agent suggests one small way to find out.
@@ -257,7 +257,7 @@ character. Used too often, they exhaust it.
 
 *A note from Brendan O'Keefe, founder of onetoeight.org.*
 
-I wrote this list because I keep meeting teenagers who want to
+I wrote this list because I keep meeting young people aged 13 to 23 who want to
 grow but don't know what to ask. The hardest part of being
 thirteen in 2026 is not that there is no wisdom available. It
 is that the wisdom is buried under noise. The agent's job is

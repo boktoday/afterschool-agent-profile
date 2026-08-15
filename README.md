@@ -2,7 +2,7 @@
 
 The **Afterschool Agent** is a personalised AI assistant built on
 [Hermes Agent](https://hermes-agent.nousresearch.com/docs) for
-teenagers (13–23) learning to put the **Eight Essentials** into daily
+young people aged 13 to 23 learning to put the **Eight Essentials** into daily
 practice. It is a gentle mentor that runs a daily rhythm of audio
 plans, reflection check-ins, and small actions, taught from a guide of
 Markdown files the student (or their parent) drops into the repo.
@@ -14,7 +14,7 @@ working end to end. Read it once, then run through the steps.
 
 ## What this product is
 
-A teen learns the Eight Essentials best by **doing one small thing a
+A young person aged 13 to 23 learns the Eight Essentials best by **doing one small thing a
 day** over weeks and months — not by reading a book. The Afterschool
 Agent exists to make that daily rhythm stick:
 
@@ -131,7 +131,7 @@ approval.
 
 ### The twenty daily prompts
 
-A small library of go-to questions a teenager can put to the
+A small library of go-to questions a young person aged 13 to 23 can put to the
 Afterschool Agent at any time. The agent reads the relevant guide
 chapter, draws on what it already knows about the student, and
 answers in their voice, in their tradition.
@@ -141,7 +141,7 @@ to have a small set of go-to prompts that surface the essentials,
 draw out reflection, and turn curiosity into a daily practice.
 Pick one or two. Skip the rest. Rotate through the week.
 
-The prompts are written in the teen's voice. The agent does not
+The prompts are written in the young person aged 13 to 23's voice. The agent does not
 lecture back. It asks the question, holds space for the answer,
 and follows up with one small action.
 
@@ -247,7 +247,7 @@ You need:
   `opencode + deepseek-v4-flash`. You add the key with `hermes setup`.
 - **A Jina AI free API key** for web search. Sign up free at
   <https://jina.ai/> — no credit card. The free tier is enough for a
-  teenager's daily use.
+  young person aged 13 to 23's daily use.
 - **A Telegram bot** (recommended) or a WhatsApp bridge. Telegram is
   much easier — see Step 4.
 

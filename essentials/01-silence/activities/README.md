@@ -34,7 +34,7 @@ Sit in a chair — not your bed, not the couch — for two minutes.
 Phone in another room. Timer on. Eyes open or closed, your call.
 
 ## Why it works
-Most teenagers have never been alone with their own mind without
+Most young people aged 13 to 23 have never been alone with their own mind without
 a screen to fall back on. Two minutes is short enough that
 resistance doesn't have time to build. The point isn't the time.
 It's the practice of *choosing* to be alone with yourself.

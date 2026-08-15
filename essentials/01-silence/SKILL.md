@@ -20,7 +20,7 @@ essential, and the one everything else rests on.
 
 When the student is working on Silence, hold these in mind:
 
-- **Silence is a skill, not a personality trait.** Most teenagers
+- **Silence is a skill, not a personality trait.** Most young people aged 13 to 23
   have never been taught to sit with themselves. They think silence
   is emptiness, or boredom, or punishment. It's the opposite. It's
   the place where you hear your own mind.

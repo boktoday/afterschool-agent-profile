@@ -235,7 +235,7 @@ has consequences:
 
    Myopia epidemic. Rates of short-sightedness have skyrocketed in
    the last 30 years, directly linked to lack of outdoor light during
-   childhood. In some East Asian cities, 90% of teenagers are now
+   childhood. In some East Asian cities, 90% of young people aged 13 to 23 are now
    short-sighted.
    Vitamin D deficiency. Affects an estimated 1 billion people
    worldwide, causing bone problems, immune dysfunction, and

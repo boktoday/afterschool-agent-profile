@@ -38,7 +38,7 @@ metadata:
 
 Use this skill to turn a blank or lightly configured Afterschool
 Agent profile into a setup chosen by its owner — the parent or
-mentor setting up the profile for a teenager, or the teenager
+mentor setting up the profile for a young person aged 13 to 23, or the young person aged 13 to 23
 themselves if they're old enough to install their own tool.
 
 The workflow is conversational and consent-gated: learn the

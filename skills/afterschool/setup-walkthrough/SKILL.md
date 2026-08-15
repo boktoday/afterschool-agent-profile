@@ -134,7 +134,7 @@ machine-specific.
 
 The agent needs a way to do web search and page fetch for
 research during lessons. The free Jina AI tier is enough for a
-teenager's daily use.
+young person aged 13 to 23's daily use.
 
 ### Sign up
 
@@ -220,7 +220,7 @@ numbers. The agent walks the student through one of:
   student needs Node.js installed and to keep a session running.
   Mention this only if the student asks — don't push it.
 
-For most teenagers, **Telegram is the right choice** — easier,
+For most young people aged 13 to 23, **Telegram is the right choice** — easier,
 clearer, and the audio player renders inline. Recommend Telegram
 first. Mention WhatsApp as a fallback for households that don't
 use Telegram.
