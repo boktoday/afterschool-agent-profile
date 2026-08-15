@@ -162,6 +162,24 @@ The prompts file is tradition-neutral. The agent responds in the
 student's tradition — Christian or Universal — based on the
 onboarding memory.
 
+### Branching by delivery order
+
+The onboarding stores `essentials_order` in memory as `sequential`
+or `randomised`. The agent honours the same order when drawing
+prompts:
+
+- **Sequential** — prompts naturally cluster around the essential
+  the student is on. The agent does not force this; it just lets
+  it happen. If the student is mid-Silence and asks for a prompt,
+  the agent's first instinct is to lean toward Silence.
+- **Randomised** — the agent picks the prompt that matches the
+  moment, regardless of order. All eight essentials remain
+  available. The agent does not pretend the student is "behind"
+  on any essential.
+
+The student can switch the order later by updating the memory key.
+No re-onboarding required.
+
 ### What the prompts file is not
 
 - It is not a checklist. The student picks one or two and rotates.

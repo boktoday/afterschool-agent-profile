@@ -48,6 +48,23 @@ chosen tradition; it never mixes the two:
 The student can change tradition later, but lessons branch from that
 moment on.
 
+### Two delivery orders
+
+Every student also picks how the Eight Essentials are served:
+
+- **Sequential** (default) — walk through essentials 1 to 8 in order.
+  This is the most coherent and is the order the guide was written
+  for. Recommended for new students.
+- **Randomised** — draw any essential on any day, matched to what
+  the student seems to need that day (longest gap, recent struggle,
+  day's energy). Each Morning Minute opens with a knowledge summary
+  from the chosen essential plus one small activity. Best for
+  students who already know what they need.
+
+In both modes, **all eight essentials are covered eventually.** The
+student can switch later by updating the `essentials_order` memory
+key — no re-onboarding required.
+
 ### The Eight Essentials (in the order the guide teaches them)
 
 1. **Silence** — sit still, be alone with your own thoughts

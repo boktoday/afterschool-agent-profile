@@ -1,6 +1,6 @@
 ---
 name: afterschool-agent-onboarding
-description: Use when a new Afterschool Agent profile needs guided first-run setup, identity choices, tradition (Christian or Universal), morning voice and delivery channel (Telegram or WhatsApp), Piper TTS and Jina AI setup, Eight Essentials guide loading, memory preferences, and Morning Minute + Afterschool Check-In schedule. Plan the setup conversationally, obtain approval, apply only the selected changes, and verify every result.
+description: Use when a new Afterschool Agent profile needs guided first-run setup, identity choices, tradition (Christian or Universal), morning voice and delivery channel (Telegram or WhatsApp), Piper TTS and Jina AI setup, Eight Essentials guide loading, Eight Essentials delivery order (sequential or randomised), memory preferences, and Morning Minute + Afterschool Check-In schedule. Plan the setup conversationally, obtain approval, apply only the selected changes, and verify every result.
 version: 2.0.0
 author: Afterschool Agent contributors
 license: MIT
@@ -296,8 +296,42 @@ Ask for:
   timezone).
 - Whether it should run every day or only school days or only
   weekends.
-- The day's essential (default: rotate one per day in order).
 - The voice (already picked in Piper step).
+
+### Eight Essentials delivery order
+
+Ask the student (or their parent if the student is younger) how they
+want the Eight Essentials to be delivered:
+
+> "There are two ways I can serve up the Eight Essentials.
+> **Sequential** — one through eight, in order, with each building on
+> the last. This is the most coherent and is what the guide was
+> written for. **Randomised** — drawn from any essential on any day,
+> with a knowledge summary from the guide plus a daily activity,
+> matched to what you seem to need that day. This is more flexible
+> but each essential takes longer to land. Which works for you?"
+
+If the student is unsure, default to **sequential**. Sequential is
+the path the guide was designed for; randomised is a power-user
+choice for teens who already know what they need.
+
+Record the choice in profile memory as `essentials_order` with the
+value `sequential` or `randomised`. The Morning Minute cron prompt
+and the `eight-essentials-curriculum` skill both read this key.
+
+### What the choice changes
+
+| Mode | What the agent does |
+|---|---|
+| **Sequential** | Walks essentials 01 through 08 in order. Each day's Morning Minute references the previous day's essential where it makes sense. The guide's flow is preserved. Recommended for new students. |
+| **Randomised** | Picks the essential for the day based on three signals: what hasn't been touched in the longest time, what the student said they were struggling with recently, and what fits the day's energy. Each Morning Minute opens with a short knowledge summary from the chosen essential's guide chapter and proposes one small activity. Best for students who already know what they need. |
+
+In both modes, **all eight essentials are covered** — sequential
+just covers them in a fixed order; randomised spreads them across
+days but never skips one permanently.
+
+The student can switch later by updating the `essentials_order`
+memory key — no re-onboarding required.
 
 ### Afterschool Check-In schedule
 
@@ -331,6 +365,9 @@ Identity:
 
 Tradition:
 - Christian / Universal
+
+Eight Essentials delivery:
+- Sequential (1 → 8) / Randomised
 
 Piper TTS:
 - Voice: <voice name>
@@ -410,8 +447,20 @@ The Morning Minute cron prompt must say:
   `essentials/<NN-name>/lessons/`. Read at least one lesson per
   day. Track which lessons have been read; do not repeat within
   ~30 days.
+- **Read the `essentials_order` memory key.** If `sequential`,
+  walk essentials 01 through 08 in order and reference the
+  previous day's essential where it makes sense. If `randomised`,
+  pick today's essential based on three signals: longest gap
+  since last touched, what the student said they were struggling
+  with recently, and what fits the day's energy. In both modes,
+  every essential must still be covered eventually.
 - Stay inside the chosen tradition (Christian or Universal). Don't
   mix the two.
+- **If `randomised`:** open the Morning Minute with a one-paragraph
+  knowledge summary from the chosen essential's guide chapter,
+  then propose one small activity for the day. The summary is
+  what carries the essential's teaching on a randomised day;
+  the activity is the practice.
 - Generate a brief plan: the day's essential, one small action,
   and the quote or reflection. See `morning-minute` skill for the
   full contract.
@@ -431,12 +480,14 @@ cronjob(
     schedule="0 6 * * *",
     name="Morning Minute",
     prompt="""You are running the student's Morning Minute for today.
-    Use the morning-minute skill. The student's tradition is
-    <christian/universal>. The voice is <voice path>. The
-    delivery channel is <telegram/whatsapp>. Generate the day's
-    plan, run Piper TTS, upload to here.now, deliver inline. Do
-    not write memories or ask for credentials. Deliver only the
-    final response with the audio and the plan text.""",
+        Use the morning-minute skill. The student's tradition is
+        <christian/universal>. The essentials delivery order is
+        <sequential/randomised> — read this from the essentials_order
+        memory key, not from this prompt. The voice is <voice path>.
+        The delivery channel is <telegram/whatsapp>. Generate the day's
+        plan, run Piper TTS, upload to here.now, deliver inline. Do
+        not write memories or ask for credentials. Deliver only the
+        final response with the audio and the plan text.""",
     enabled_toolsets=["file", "terminal", "tts"],
 )
 ```
