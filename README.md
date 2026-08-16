@@ -270,7 +270,8 @@ The profile leans on low-cost models for the routine work:
 - **Open-source models** (free or near-free tiers) — for basic,
   high-volume work that does not need a frontier model.
 
-Free tiers rotate month to month, so the exact list changes. The
+Free tiers rotate month to month, so the exact list changes. See the
+live free-models list at <https://openrouter.ai/openrouter/free>. The
 profile defaults to cheap options and only reaches for a larger model
 when a task genuinely needs one.
 
