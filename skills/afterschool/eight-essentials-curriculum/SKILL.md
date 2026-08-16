@@ -47,6 +47,9 @@ asks something the Morning Minute cannot answer.
 
 - For the daily Morning Minute — that has its own skill.
 - For the daily check-in — that has its own skill.
+- For the three on-demand learning formats — the essential summary
+  (key points + voice note), the three-page HTML lesson, or the
+  rhyming spoken-word poem — use `essential-deep-dives`.
 - For setup questions (Piper install, Jina key, Telegram bot) —
   use `setup-walkthrough`.
 
@@ -301,6 +304,9 @@ practice, not doctrine.
 - `morning-minute` — uses the essentials for a daily summary.
 - `afterschool-checkin` — uses the essentials for a daily
   reflection.
+- `essential-deep-dives` — the on-demand formats (summary + voice
+  note, HTML lesson, spoken-word poem) that go deeper than a chat
+  reply.
 - `setup-walkthrough` — walks the student through dropping the
   guide MD files into `essentials/01..08/`.
 - `afterschool-agent-onboarding` — sets the tradition.

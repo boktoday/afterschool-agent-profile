@@ -395,6 +395,31 @@ day. The Telegram or WhatsApp chat **is** the daily surface:
   like?" "How do I find a real community?" The agent reads the guide
   and teaches.
 
+#### Deeper ways to learn an essential (on demand)
+
+Beyond the daily rhythm, the student can ask for any of **three deeper
+formats** on any essential. All three are handled by the
+`essential-deep-dives` skill (see `skills/afterschool/essential-deep-dives/`),
+and all three require nothing but asking:
+
+- **Essential Summary** — the key points of one essential in plain
+  language, plus a 3 to 5 minute **voice note** the agent generates
+  (Piper) and drops into the chat so the student can listen while
+  walking or doing chores.
+- **Essential Lesson** — a beautiful **three-page lesson** built as an
+  HTML page and published to the household's **here.now** account.
+  It teaches the essential with **cited sources** (researched via the
+  Jina API whenever the lesson needs material the guide doesn't
+  carry), **key quotes**, and a short **quiz** the student answers on
+  the page. The agent sends the link in the chat.
+- **Essential Poem** — a rhyming **spoken-word poem** on the
+  essential, read aloud as a voice note with the text below so the
+  student can read along.
+
+The agent reads the guide before drafting any of them, branches by
+the student's tradition, and tailors to the student's profile — the
+same rules as the curriculum skill.
+
 ### 8 — Maintenance
 
 Occasional:
@@ -527,6 +552,7 @@ afterschool-agent-profile/
 │   └── afterschool/                       ← Afterschool-specific skills
 │       ├── afterschool-checkin/           ← afternoon reflection
 │       ├── eight-essentials-curriculum/   ← teaches from the guide
+│       ├── essential-deep-dives/          ← summary, lesson, poem formats
 │       └── setup-walkthrough/            ← Piper, Jina, channel setup
 │
 ├── plugins/hermes-token-router/           ← optional tool-narrowing plugin
