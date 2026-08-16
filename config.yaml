@@ -2,18 +2,18 @@
 # After install, run `hermes setup` to add your own provider key,
 # or set model.default / model.provider below (see README.md).
 #
-# Default chain: opencode (https://opencode.ai/zen/go/v1) → deepseek-v4-flash.
-# Falls back to openrouter (OPENROUTER_API_KEY) → deepseek-v4-flash if opencode
-# is not available. The opencode provider is usually configured globally via
-# `hermes setup`, in which case this profile picks it up automatically.
+# Default chain: openrouter (OPENROUTER_API_KEY) → deepseek-v4-flash.
+# Falls back to opencode (https://opencode.ai/zen/go/v1) → deepseek-v4-flash
+# if openrouter is not available. OpenRouter is preferred because a single
+# key unlocks a large catalogue of models — including free-tier and
+# multimodal (image, audio) models — and lets the young person switch models
+# without changing providers.
 _config_version: 33
 model:
   default: deepseek-v4-flash
-  provider: opencode
+  provider: openrouter
 fallback_providers:
 - provider: opencode
-  model: deepseek-v4-flash
-- provider: openrouter
   model: deepseek-v4-flash
 compression:
   enabled: true

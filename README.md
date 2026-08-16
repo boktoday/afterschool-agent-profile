@@ -242,9 +242,11 @@ You need:
   a real install). `python --version`.
 - **Piper TTS.** A working install. See Step 2 below.
 - **ffmpeg** for WAV → OGG conversion. `ffmpeg -version`.
-- **A model provider key** (opencode, OpenRouter, or another
-  OpenAI-compatible endpoint). The profile defaults to
-  `opencode + deepseek-v4-flash`. You add the key with `hermes setup`.
+- **A model provider key.** The profile defaults to
+  `openrouter + deepseek-v4-flash`. One key unlocks a large catalogue
+  of models — including free-tier and multimodal (image, audio) models.
+  Sign up free at <https://openrouter.ai/> and add the key with
+  `hermes setup`. OpenCode Go is the fallback.
 - **A Jina AI free API key** for web search. Sign up free at
   <https://jina.ai/> — no credit card. The free tier is enough for a
   young person aged 13 to 23's daily use.
@@ -573,16 +575,16 @@ afterschool-agent-profile/
 ```yaml
 model:
   default: deepseek-v4-flash
-  provider: opencode
+  provider: openrouter
 fallback_providers:
   - provider: opencode
     model: deepseek-v4-flash
-  - provider: openrouter
-    model: deepseek-v4-flash
 ```
 
-Change `provider` and `default` to switch. The fallback chain runs
-only when the primary is unavailable.
+Change `provider` and `default` to switch. OpenRouter is the default
+because a single key opens the widest catalogue — free models, plus
+multimodal (image, audio) models — without changing providers. The
+fallback chain runs only when the primary is unavailable.
 
 ### Toolsets (`config.yaml`)
 

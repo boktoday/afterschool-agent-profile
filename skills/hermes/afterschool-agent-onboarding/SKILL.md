@@ -353,8 +353,9 @@ query before calling it working.
 #### Provider / model
 
 Confirm the model provider works end-to-end. The profile defaults
-to `opencode` with `deepseek-v4-flash`. The agent walks the user
-through adding the key if it isn't set.
+to `openrouter` with `deepseek-v4-flash` — one key for a large
+catalogue including free-tier and multimodal (image, audio) models.
+The agent walks the user through adding the key if it isn't set.
 
 ### Morning Minute schedule
 
