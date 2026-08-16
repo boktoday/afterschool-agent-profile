@@ -253,6 +253,27 @@ You need:
 - **A Telegram bot** (recommended) or a WhatsApp bridge. Telegram is
   much easier — see Step 4.
 
+### What it costs
+
+The agent runs pay-as-you-go, not on a subscription. You top up an
+OpenRouter account and the agent draws from that credit.
+
+- **First month — about $20.** Covers the initial setup and the first
+  month of real use while the student settles into a rhythm.
+- **Ongoing — $5 to $10 a month on average.** Light daily use on cheap
+  models rarely goes higher.
+
+The profile leans on low-cost models for the routine work:
+
+- **DeepSeek V4 Flash** — the default for daily chat and lessons.
+- **Google Gemini 3.7 Flash** — the fast fallback for short tasks.
+- **Open-source models** (free or near-free tiers) — for basic,
+  high-volume work that does not need a frontier model.
+
+Free tiers rotate month to month, so the exact list changes. The
+profile defaults to cheap options and only reaches for a larger model
+when a task genuinely needs one.
+
 ### 2 — Clone the profile (one-time)
 
 ```bash
