@@ -1,6 +1,6 @@
 ---
 name: afterschool-agent-onboarding
-description: Use when a new Afterschool Agent profile needs guided first-run setup, identity choices, tradition (Christian or Universal), morning voice and delivery channel (Telegram or WhatsApp), Piper TTS and Jina AI setup, Eight Essentials guide loading, Eight Essentials delivery order (sequential or randomised), memory preferences, and Morning Minute + Afterschool Check-In schedule. Plan the setup conversationally, obtain approval, apply only the selected changes, and verify every result.
+description: Use when a new Afterschool Agent profile needs guided first-run setup, identity choices, tradition (Christian or Universal), morning voice and delivery channel (Telegram or WhatsApp), Piper TTS and Jina AI setup, Eight Essentials guide loading, Eight Essentials delivery order (sequential or randomised), memory preferences, and Morning Minute + Afterschool Check-In + Planning Session schedules. Plan the setup conversationally, obtain approval, apply only the selected changes, and verify every result.
 version: 2.0.0
 author: Afterschool Agent contributors
 license: MIT
@@ -409,6 +409,19 @@ Ask for:
 - Delivery time and timezone (default 5 pm).
 - Whether it should run every day or only school days or only
   weekends.
+
+### Planning Session schedule
+
+Ask for:
+
+- Delivery time and timezone (default 9 pm, before bed).
+- Whether it should run every day or only school days or only
+  weekends.
+
+Explain what it is: before bed, the agent drafts tomorrow's plan
+(school tasks, homework deadlines, the week's essential, one
+real-world thing), the student edits it, and the plan saves
+locally — no app, no account, no cloud sync.
 
 ### Token Router (optional)
 

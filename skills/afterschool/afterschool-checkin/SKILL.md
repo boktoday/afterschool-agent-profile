@@ -182,6 +182,8 @@ Schedule format depends on the student's choice. Common options:
 
 - `morning-minute` — the morning plan that pairs with this
   check-in.
+- `planning-session` — the evening session that maps tomorrow,
+  fed by this check-in's note.
 - `eight-essentials-curriculum` — the deeper teaching skill.
 - `afterschool-agent-onboarding` — sets the check-in time and
   channel.

@@ -24,6 +24,11 @@ Agent exists to make that daily rhythm stick:
 - An **Afterschool Check-In** lands in the afternoon. It's a short
   text message: how the day went, what's next, one question to sit
   with overnight.
+- A **Planning Session** lands before bed. It maps tomorrow: school
+  tasks, homework deadlines, the essential they're working on this
+  week, one real-world thing they want to do. The agent drafts the
+  plan, the student edits it, and it saves locally — no app, no
+  account, no cloud sync.
 - The agent teaches from the **Eight Essentials guide** stored in the
   repo (`essentials/01..08/lessons/*.md`), branching by the student's
   chosen tradition.
@@ -89,7 +94,8 @@ day    Student does the one small action
         ↓
 17:00  Afterschool Check-In  Text only → Telegram or WhatsApp
         ↓
-        Plan tomorrow
+21:00  Planning Session      Text only → Telegram or WhatsApp
+       Agent drafts tomorrow's plan → student edits → saves locally
         ↓
         Sleep
         ↓
@@ -114,20 +120,24 @@ UTC is automatic.
 | Student asks a question | Reads the relevant `essentials/<NN-name>/lessons/*.md`, synthesises, teaches |
 | Morning Minute cron fires | Generates the day's plan, runs Piper, uploads, delivers inline |
 | Check-In cron fires | Reads the most recent Morning Minute, drafts a short reflection, delivers as text |
+| Planning Session cron fires | Drafts tomorrow's plan (school tasks, deadlines, weekly essential, one real-world thing), the student edits it, saves locally |
 | Student asks for a deeper dive | Uses the `eight-essentials-curriculum` skill — reads the guide, teaches from it |
 
 ### What runs in the background
 
-Two cron jobs, both off until the student approves them at onboarding:
+Three cron jobs, all off until the student approves them at onboarding:
 
 1. **Morning Minute** — fires at the chosen time in the student's
    timezone, every day (or weekdays only, if preferred). Generates
    audio + text and delivers to Telegram or WhatsApp.
 2. **Afterschool Check-In** — fires at the chosen afternoon time,
    same day-rule as the Morning Minute. Sends a short text message.
+3. **Planning Session** — fires before bed (default 9 pm), same
+   day-rule. Drafts tomorrow's plan for the student to edit, then
+   saves it locally.
 
-Both are **opt-in** — the orientation creates them only after explicit
-approval.
+All three are **opt-in** — the orientation creates them only after
+explicit approval.
 
 ### The twenty daily prompts
 
@@ -330,7 +340,8 @@ Here is what it covers, in order:
 | 8. Memory | Mnemosyne recommended (local-first, no external account) | `hermes memory setup` |
 | 9. Morning Minute schedule | What time, what timezone, what days | Created as a cron job |
 | 10. Afterschool Check-In schedule | What time, what timezone, what days | Created as a cron job |
-| 11. Token Router (optional) | The plugin that narrows the tool surface | `plugins.enabled` in `config.yaml` |
+| 11. Planning Session schedule | What time (default 9 pm), what timezone, what days | Created as a cron job |
+| 12. Token Router (optional) | The plugin that narrows the tool surface | `plugins.enabled` in `config.yaml` |
 
 At the end the agent shows a **Proposed setup** summary and waits for
 your explicit approval before applying anything.
@@ -414,6 +425,11 @@ day. The Telegram or WhatsApp chat **is** the daily surface:
 
 - **Morning Minute** arrives as a voice bubble + text plan.
 - **Afterschool Check-In** arrives as text.
+- **Planning Session** arrives before bed as text — the agent
+  drafts tomorrow's plan (school tasks, homework deadlines, the
+  week's essential, one real-world thing), the student edits it,
+  and it saves locally. See
+  `skills/afterschool/planning-session/`.
 - **Reply to the check-in** with a one-line note on how the day went.
   The agent saves a summary and uses it as the callback in tomorrow's
   Morning Minute.
