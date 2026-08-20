@@ -240,6 +240,54 @@ essentials remain available in both modes.
 
 ---
 
+## Daily rituals
+
+This is the at-a-glance map of every ritual the agent runs — what it
+is, when it fires, where it lands, and where it is documented in
+detail.
+
+| Ritual | When | Channel | What happens |
+|---|---|---|---|
+| **Morning Minute** | Daily at the student's chosen time (default 6 am) | Telegram or WhatsApp — **voice bubble + text** | Audio plan for the day, focused on one small action from the current essential. |
+| **Afterschool Check-In** | Daily at the student's chosen time (default 5 pm) | Telegram or WhatsApp — **text only** | Reflection on how the day went, plan for tomorrow, one question to sit with overnight. |
+| **Planning Session** | Daily before bed at the student's chosen time (default 9 pm) | Telegram or WhatsApp — **text only** | Agent drafts tomorrow's plan (school tasks, homework deadlines, the week's essential, one real-world thing). The student edits it. Saves locally. |
+| **Essential Summary** | On demand, any time the student asks | Telegram or WhatsApp — **voice note** | 3 to 5 minute spoken summary of one essential + a short written key-points list. |
+| **Essential Lesson** | On demand, any time the student asks | here.now — **HTML page link in chat** | Three-page lesson on one essential with cited sources, key quotes, and a short quiz. |
+| **Essential Poem** | On demand, any time the student asks | Telegram or WhatsApp — **voice note + text** | A rhyming spoken-word poem on the essential, read aloud with text underneath. |
+| **Essential Song** | On demand, any time the student asks | Telegram or WhatsApp — **MP3 voice note + text** | The agent writes a poem about the essential, then turns it into a real song via Google Lyria 3 on OpenRouter. Costs ~$0.08 per song — confirm before running. |
+| **Essential Music Video** | On demand, any time the student asks | here.now — **MP4 video link in chat** | The song above, plus a storyboard of still images stitched together with the audio, optional poem-text overlay. Costs ~$0.35 total — confirm before running. |
+
+**The day.** The Morning Minute opens the day, the Check-In closes
+it, and the Planning Session maps tomorrow before sleep. The three
+on-demand formats (Summary / Lesson / Poem) are there whenever a
+young person wants to learn an essential more deeply than the
+Morning Minute can cover in one minute.
+
+**Where the code lives.** Each row links to a skill in the repo:
+
+| Ritual | Skill path |
+|---|---|
+| Morning Minute | `skills/hermes/morning-minute/` |
+| Afterschool Check-In | `skills/afterschool/afterschool-checkin/` |
+| Planning Session | `skills/afterschool/planning-session/` |
+| Essential Summary, Lesson, Poem, Song, Music Video | `skills/afterschool/essential-deep-dives/` (Song and Music Video use `skills/creative/openrouter-lyria-music/` and `skills/creative/poem-song-video-studio/`) |
+
+**Consent.** The three cron-based rituals (Morning Minute, Check-In,
+Planning Session) are off until the student or parent approves them
+during onboarding. The three on-demand formats are available
+immediately — the student just asks. See [The setup workflow →
+What runs in the background](#what-runs-in-the-background) for the
+exact opt-in flow.
+
+**How to customise.** The agent walks the student through choosing
+the time, timezone, and day-rule for each cron ritual during setup.
+All three can be paused, resumed, or removed later with
+`cronjob(action="...")`. The on-demand formats pick the student's
+tradition automatically; their voice and length are inherited from
+the morning-minute Piper voice already chosen.
+
+---
+
 ## What it costs to run
 
 Afterschool Agent runs **pay-as-you-go** — no subscription. You top up
@@ -457,6 +505,16 @@ and all three require nothing but asking:
 - **Essential Poem** — a rhyming **spoken-word poem** on the
   essential, read aloud as a voice note with the text below so the
   student can read along.
+- **Essential Song** — the agent writes an original poem about the
+  essential, then turns it into a real song (MP3) via
+  `google/lyria-3-pro-preview` on OpenRouter (~$0.08 per song).
+  The voice note plays in chat, the text of the poem follows.
+  Confirm spend before running.
+- **Essential Music Video** — the Song above, plus a storyboard of
+  image frames stitched with the audio and optional poem-text
+  overlay (~$0.35 in total for song + storyboard images + ffmpeg
+  assembly). Published as an MP4 to here.now; the link goes in
+  chat. Confirm spend before running.
 
 The agent reads the guide before drafting any of them, branches by
 the student's tradition, and tailors to the student's profile — the
