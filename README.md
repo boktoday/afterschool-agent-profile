@@ -274,10 +274,25 @@ Morning Minute can cover in one minute.
 
 **Consent.** The three cron-based rituals (Morning Minute, Check-In,
 Planning Session) are off until the student or parent approves them
-during onboarding. The three on-demand formats are available
-immediately — the student just asks. See [The setup workflow →
+during onboarding. The five on-demand formats (Summary, Lesson,
+Poem, Song, Music Video) are available immediately — the student
+just asks. The two paid formats (Song and Music Video, Lyria 3 +
+storyboard images) require the student to confirm spend each time
+the agent is asked for one. See [The setup workflow →
 What runs in the background](#what-runs-in-the-background) for the
 exact opt-in flow.
+
+**Song and Music Video skills.** The two paid formats reuse two
+existing skills rather than reinventing them:
+
+| Format | Underlying skill | What it adds on top of `essential-deep-dives` |
+|---|---|---|
+| **Essential Song** | `skills/creative/openrouter-lyria-music/` | POEM lyrics → MP3 audio via Google Lyria 3 (~$0.08/song). |
+| **Essential Music Video** | `skills/creative/poem-song-video-studio/` | SONG + ~8 storyboard images + ffmpeg → MP4 (~$0.35 total). |
+
+Both skills already exist in the repo with full Lyria 3 model
+notes, scripts, and a cost guard. The agent loads the underlying
+skill when the student asks for the format.
 
 **How to customise.** The agent walks the student through choosing
 the time, timezone, and day-rule for each cron ritual during setup.
