@@ -1,6 +1,6 @@
 ---
 name: essential-deep-dives
-description: Use when the student asks to go deeper on an essential — an essential summary (key points + a 3 to 5 minute voice note), a three-page HTML lesson (published to here.now with cited sources and a quiz), or a rhyming spoken-word poem. Reads the guide, branches by tradition, and tailors to the student's profile.
+description: Use when the student asks to go deeper on an essential — an essential summary (key points + a 3 to 5 minute voice note), a three-page HTML lesson (published to here.now with cited sources and a quiz), a rhyming spoken-word poem, an original song (Lyria 3 on OpenRouter, ~$0.08), or a music video of the song (~$0.35). Reads the guide, branches by tradition, and tailors to the student's profile.
 version: 1.0.0
 author: Afterschool Agent contributors
 license: MIT
@@ -57,9 +57,17 @@ which essential they want.
   full lesson" → **Lesson**.
 - The student says "give me a poem about [essential]", "rhyme me
   something on [essential]", "spoken word on [essential]" → **Poem**.
+- The student says "sing me [essential]", "make me a song about
+  [essential]", "turn that into a song", "set the poem to music"
+  → **Song** (~$0.08, confirm spend).
+- The student says "make me a music video for [essential]", "video
+  me a song", "storyboard the song" → **Music Video** (~$0.35,
+  confirm spend). This also implicitly produces the Song first;
+  don't skip that step.
 
 If the request is ambiguous ("tell me about Community"), default to
-the **Summary** and offer the lesson or poem as a next step.
+the **Summary** and offer the lesson or poem as a next step. Do NOT
+default to Song or Music Video — they cost real money.
 
 ## When **not** to use
 
@@ -376,6 +384,115 @@ MEDIA:/absolute/path/to/essential-poem-community.ogg
 
 Use the `sendVoice` multipart path (`morning-minute` Step 7) only for
 automated/cron Telegram delivery.
+
+---
+
+## Format 4 — Essential Song (poem + Lyria 3 MP3)
+
+Builds on Format 3 (the poem). The poem is the lyrics; Lyria turns
+them into a real song.
+
+**Cost:** ~$0.08 per song via `google/lyria-3-pro-preview` (a full
+song) or ~$0.04 for `google/lyria-3-clip-preview` (a 30 second clip).
+**Always confirm spend before running.** Confirm means actually
+asking the student: "This will cost about eight cents through your
+OpenRouter credit. Want me to go ahead?" Don't infer consent from
+the previous sentence.
+
+### Step 1 — Confirm spend
+
+Ask the student to confirm before the first Lyria call. After the
+first run, the student may pre-authorise ongoing spend; honour that.
+
+### Step 2 — Write the poem first
+
+Use the Format 3 poem. Section "Step 1 — Write the poem" carries
+over unchanged. The poem is the lyrics.
+
+### Step 3 — Call Lyria via OpenRouter
+
+`OPENROUTER_API_KEY` is set. POST to `https://openrouter.ai/api/v1/
+audio/generations` with the lyrics as the prompt and the model
+`google/lyria-3-pro-preview`. Pipe the response to a file.
+
+See `skills/creative/openrouter-lyria-music/` for the exact request
+shape, the right Wayland-style mode setting, and the upstream error
+modes.
+
+### Step 4 — Deliver
+
+Send the MP3 as a voice note (same `sendVoice` pattern as the
+morning-minute). Follow it with the text of the poem, line by line.
+
+```
+MEDIA:/absolute/path/to/essential-song-body.mp3
+
+<poem text, line by line>
+```
+
+Tell the student the cost just incurred and show the running
+monthly total so spend stays legible.
+
+---
+
+## Format 5 — Essential Music Video (song + storyboard images + ffmpeg)
+
+The full pipeline: poem → song → N storyboard images → ffmpeg
+assembly → MP4 → here.now publish → link in chat.
+
+**Cost:** ~$0.35 total — ~$0.08 for the song + ~$0.27 for the
+~8 storyboard images (Qwen Wan 2.5 / DALL-E 3 / Flux — pick one
+that's currently reliable on OpenRouter). **Always confirm spend
+before running.**
+
+### Step 1 — Confirm spend
+
+Same rule as Format 4: ask first.
+
+### Step 2 — Produce the song (Mode B of the studio skill)
+
+Run **Format 4 above** before anything else. The Music Video
+includes the Song. Don't skip the Song and try to stitch a video
+with stock audio; the song IS the audio.
+
+### Step 3 — Generate the storyboard (one image per stanza)
+
+Pick a stable image model on OpenRouter. Default preference order:
+Wan 2.5 / DALL-E 3 / Flux / SDXL. Generate **one image per stanza**
+of the poem — same prompt, same style tokens, same seed. Aim for
+8 to 12 frames total; keep visual continuity.
+
+Use `skills/creative/comfyui-image/` or `skills/creative/qwen-image/`
+if configured; otherwise just call the OpenRouter image endpoint
+directly. ~8 calls, ~$0.03 each.
+
+### Step 4 — Overlay poem text (optional)
+
+If the student wants subtitles, draw each line of poem text on the
+matching storyboard frame using PIL or ffmpeg. Cheaper than
+generating the text into the image; cleaner when the text changes.
+
+### Step 5 — Assemble the MP4
+
+ffmpeg stitches the storyboard images in order with the song as
+the audio track. Each image gets `song_duration / image_count`
+seconds (so the audio doesn't run out before the story finishes
+and vice versa).
+
+```bash
+ffmpeg -y -framerate 1/$img_dur -i frame_%02d.png \
+  -i essential-song-body.mp3 \
+  -c:v libx264 -pix_fmt yuv420p -shortest essential-video.mp4
+```
+
+### Step 6 — Publish to here.now
+
+Same publish pattern as Format 2's lesson (drive + finalize +
+publish). Send the link in chat, the MP4 plays inline in
+Telegram or is opened in WhatsApp.
+
+Tell the student the cost just incurred; show running monthly
+total.
 
 ---
 
