@@ -19,7 +19,7 @@ for both the installer and the agent.
 | Piper TTS | See Step 4 | Installed locally (no account) |
 | Model provider key | — | https://openrouter.ai/ (default) or https://orcarouter.ai/ |
 | Jina AI free key | — | https://jina.ai/ — free tier, no credit card |
-| here.now key | — | https://here.now/ — for public audio URLs |
+| here.now key | — | https://here.now/ — the student's multimedia space: HTML pages, images, audio, video |
 | Telegram (recommended) | — | Bot via https://t.me/BotFather — WhatsApp works but is harder and costs more |
 
 ### Step 1: Clone the profile
@@ -113,7 +113,8 @@ TELEGRAM_BOT_TOKEN=...     # https://t.me/BotFather
 TELEGRAM_CHAT_ID=...       # from https://t.me/userinfobot
 
 # Audio archival
-HERENOW_API_KEY=...        # https://here.now/ — DRIVE_ID is legacy, ignore it
+HERENOW_API_KEY=...        # https://here.now/ — the student's multimedia space
+                           # (HTML, images, audio, video). DRIVE_ID is legacy, ignore it.
 ```
 
 Every key has a matching signup link in the `.env.example` comments.
@@ -136,6 +137,12 @@ The Morning Minute fires at the chosen time (stored in UTC — 6am AEST
 = `0 20 * * *`). The agent generates audio, uploads to here.now for
 the public URL, then delivers to Telegram via **multipart upload**
 (not a `MEDIA:<url>` link — here.now blocks Telegram's fetch bot).
+
+here.now is more than an audio host — it's the student's public
+**multimedia space**. The same account and API key publish HTML
+lesson pages, images, and MP4 videos (music videos, storyboards), so
+anything the student creates online goes through here.now and the
+link lands back in chat.
 
 Daily surface is just the chat: voice bubble in the morning, text
 check-in at 5pm, reply to the check-in and tomorrow's minute opens
