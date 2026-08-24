@@ -11,15 +11,16 @@ for both the installer and the agent.
 
 ### Step 0: Prerequisites (one-time, on the machine)
 
-| You need | Check with | Notes |
+| You need | Check with | Get it at |
 |---|---|---|
-| Hermes Agent | `hermes --version` | Install from https://hermes-agent.nousresearch.com/docs |
-| Python 3.10–3.13 | `python --version` | Real install, not the Windows Store shim |
-| ffmpeg | `ffmpeg -version` | For WAV → OGG audio conversion |
-| Piper TTS | See Step 4 | The Morning Minute is audio |
-| Model provider key | — | Default: OpenRouter + `deepseek-v4-flash`. Sign up free at https://openrouter.ai/ |
+| Hermes Agent | `hermes --version` | https://hermes-agent.nousresearch.com/docs |
+| Python 3.10–3.13 | `python --version` | https://www.python.org/downloads/ |
+| ffmpeg | `ffmpeg -version` | https://ffmpeg.org/download.html |
+| Piper TTS | See Step 4 | Installed locally (no account) |
+| Model provider key | — | https://openrouter.ai/ (default) or https://orcarouter.ai/ |
 | Jina AI free key | — | https://jina.ai/ — free tier, no credit card |
-| Telegram (recommended) | — | WhatsApp works but is harder and costs more |
+| here.now key | — | https://here.now/ — for public audio URLs |
+| Telegram (recommended) | — | Bot via https://t.me/BotFather — WhatsApp works but is harder and costs more |
 
 ### Step 1: Clone the profile
 
@@ -103,16 +104,19 @@ it — it does **not** invent lesson content.
 
 ```bash
 # Required
-OPENROUTER_API_KEY=...     # or your provider key
-JINA_API_KEY=...
+OPENROUTER_API_KEY=...     # https://openrouter.ai/ — or use OrcaRouter:
+ORCAROUTER_API_KEY=...     # https://orcarouter.ai/ (alternative router)
+JINA_API_KEY=...           # https://jina.ai/
 
 # Telegram
-TELEGRAM_BOT_TOKEN=...
-TELEGRAM_CHAT_ID=...
+TELEGRAM_BOT_TOKEN=...     # https://t.me/BotFather
+TELEGRAM_CHAT_ID=...       # from https://t.me/userinfobot
 
 # Audio archival
-HERENOW_API_KEY=...           # DRIVE_ID is legacy — ignore it
+HERENOW_API_KEY=...        # https://here.now/ — DRIVE_ID is legacy, ignore it
 ```
+
+Every key has a matching signup link in the `.env.example` comments.
 
 ### Step 6: Verify before the first scheduled run
 
