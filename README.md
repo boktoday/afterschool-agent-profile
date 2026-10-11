@@ -10,6 +10,8 @@ Markdown files the student (or their parent) drops into the repo.
 This README is the overview and the workflow for getting the agent
 working end to end. Read it once, then run through the steps.
 
+**Start the build path:** <https://gladtobe.here.now/build-path/>. The guided, module-by-module walk for a young person: one capability, one payoff, each week.
+
 ---
 
 ## What this product is
@@ -534,6 +536,11 @@ and all three require nothing but asking:
 The agent reads the guide before drafting any of them, branches by
 the student's tradition, and tailors to the student's profile — the
 same rules as the curriculum skill.
+
+**The build path.** When the daily rhythm feels steady, the next step
+is the [build path](https://gladtobe.here.now/build-path/): self-paced
+modules (Foundations, Planning, Morning Minute, Extend) that grow the
+student's skills one week at a time.
 
 ### 8 — Maintenance
 
