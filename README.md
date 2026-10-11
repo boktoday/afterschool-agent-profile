@@ -1,7 +1,7 @@
 # Afterschool Agent — overview and setup workflow
 
 > **Download, free for everyone:** [the latest ZIP](https://github.com/boktoday/afterschool-agent-profile/archive/refs/heads/main.zip) — or use the green **Code → Download ZIP** button on this page.  
-> Come subscribe to [our community](https://discord.gg/E48uw7Z94) for installation help, weekly office hours, and challenge quests.
+> Come subscribe to [our community](https://discord.gg/y5FhfKpwKU) for installation help, weekly office hours, and challenge quests.
 >
 > **License:** free to use, share and build on for noncommercial purposes with credit (PolyForm Noncommercial 1.0.0, see LICENSE). The Build with Jesus, OneToEight and Afterschool names and marks stay ours; bundled third-party parts keep their own licenses.
 
