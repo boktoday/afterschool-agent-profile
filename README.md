@@ -335,6 +335,20 @@ when a task genuinely needs one.
 
 ---
 
+## Local models: the free way to run the daily rhythm
+
+The repetitive work is the point: the scheduled check-ins, the Morning Minute, the nightly plan, the daily cron jobs. It is deliberately simple and repeats every day, which makes it the perfect job for a **local model** on your own machine:
+
+- **Nothing to pay per message**, and no free tier to rotate away.
+- **Nothing leaves the machine.** The student's reflections stay theirs.
+- **Keeps running offline.** The rhythm survives a dropped connection.
+
+**First stop: [canirun.ai](https://canirun.ai)** reads your GPU or Mac straight from the browser and ranks the open models that fit, with the exact Ollama or LM Studio command for the one you choose. Also worth knowing: [localllm-advisor.com](https://localllm-advisor.com) and [localllm.run](https://localllm.run).
+
+Hermes can run each scheduled job on its own model, so the daily rhythm can live locally while an occasional big job reaches for a frontier model. Full guide: **[docs/local-models.md](docs/local-models.md)**.
+
+---
+
 ## The setup workflow
 
 ### 1 — Prerequisites (one-time, on the machine)
@@ -642,6 +656,7 @@ afterschool-agent-profile/
 ├── .env.example                           ← every variable, with comments
 ├── .gitignore
 ├── LICENSE                                ← MIT
+├── docs/                                  ← local models guide (run the rhythm offline)
 │
 ├── essentials/                            ← the Eight Essentials source content
 │   ├── 00-introduction/lessons/
@@ -711,6 +726,8 @@ Change `provider` and `default` to switch. OpenRouter is the default
 because a single key opens the widest catalogue — free models, plus
 multimodal (image, audio) models — without changing providers. The
 fallback chain runs only when the primary is unavailable.
+
+For a fully local setup, with the scheduled jobs running on a model on your own machine (free and offline), see **[docs/local-models.md](docs/local-models.md)**.
 
 ### Toolsets (`config.yaml`)
 
